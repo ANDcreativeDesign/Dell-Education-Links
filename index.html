@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Display</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 280px;
+      padding: 20px;
+      border-right: 1px solid #ccc;
+      height: 100vh;
+      overflow-y: auto;
+      background-color: #f4f4f4;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #007bff;
+    }
+
+    .sidebar p {
+      color: #6c757d;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    .product-box {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-box ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .product-box li {
+      margin-bottom: 0;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .product-box li:last-child {
+      border-bottom: none;
+    }
+
+    .product-box a {
+      text-decoration: none;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .product-box a:hover {
+      color: #007bff;
+    }
+
+    .content-area {
+      flex-grow: 1;
+      padding: 20px;
+      height: 100vh;
+    }
+
+    .content-area iframe {
+      width: 100%;
+      height: 95%;
+      border: 1px dashed #ccc;
+    }
+
+    .content-area .placeholder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 95%;
+      border: 1px dashed #ccc;
+      color: #aaa;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>DELL TECHNOLOGIES</h2>
+    <p>Education</p>
+    <div class="product-box">
+      <ul id="productList"></ul>
+    </div>
+  </div>
+
+  <div class="content-area">
+    <div id="webpagePlaceholder" class="placeholder">Webpage Here</div>
+    <iframe id="productFrame" style="display:none;"></iframe>
+  </div>
+
+  <script>
+    const products = [
+      { name: "PowerMax 8500", url: "https://test5.kaalo.com/Testing/PowerMax8500/index.html" },
+      { name: "PowerMax 8000", url: "https://test5.kaalo.com/PowerMax8000/index.html" },
+      { name: "DLC 3000", url: "https://dell.kaalo.com/DLC3000/index.html" },
+      { name: "DD9900 New", url: "https://koar.kaalo.com/DD9900_New/index.html" },
+      { name: "DD9910", url: "https://koar.kaalo.com/DD9910/index.html" },
+      { name: "DD6400", url: "https://koar.kaalo.com/DD6400/index.html" },
+      { name: "ES40", url: "https://koar.kaalo.com/ES40/index.html" },
+      { name: "DD9400", url: "https://test5.kaalo.com/Testing/DD9400/index.html" },
+      { name: "PowerEdge M7725", url: "https://test5.kaalo.com/Testing/PowerEdgeM7725/index.html" },
+      { name: "XE9680L", url: "https://test5.kaalo.com/Testing/XE9680L/index.html" },
+      { name: "XE7745", url: "https://test5.kaalo.com/Testing/XE7745/index.html" }
+    ];
+
+    const productListElement = document.getElementById('productList');
+    const productFrame = document.getElementById('productFrame');
+    const webpagePlaceholder = document.getElementById('webpagePlaceholder');
+
+    products.forEach((product, index) => {
+      const listItem = document.createElement('li');
+      const link = document.createElement('a');
+      link.textContent = `${index + 1}. ${product.name}`;
+      link.href = "#";
+      link.onclick = function() {
+        webpagePlaceholder.style.display = 'none';
+        productFrame.src = product.url;
+        productFrame.style.display = 'block';
+        return false;
+      };
+      listItem.appendChild(link);
+      productListElement.appendChild(listItem);
+    });
+  </script>
+
+</body>
+</html>
